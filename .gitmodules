@@ -1,0 +1,12 @@
+[submodule "dependencies/ron"]
+	path = dependencies/ron
+	url = https://github.com/ron-rs/ron
+[submodule "dependencies/gfx"]
+	path = dependencies/gfx
+	url = https://github.com/gfx-rs/gfx
+[submodule "dependencies/winit"]
+	path = dependencies/winit
+	url = https://github.com/tomaka/winit
+[submodule "dependencies/cgmath"]
+	path = dependencies/cgmath
+	url = https://github.com/brendanzab/cgmath
