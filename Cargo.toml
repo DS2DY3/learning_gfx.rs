@@ -17,8 +17,13 @@ dx12 = ["gfx-backend-dx12"]
 
 
 [dependencies]
-winit = { path = "dependencies/winit" }
+#winit = { path = "dependencies/winit" }
+#winit = { version = "0.17", optional = true }
+winit = "0.17"
 gfx-hal = { path = "dependencies/gfx/src/hal", version = "0.1" }
+
+[replace]
+"winit:0.17.0" = { path = "dependencies/winit" }
 
 [dependencies.gfx-backend-vulkan]
 path = "dependencies/gfx/src/backend/vulkan"
