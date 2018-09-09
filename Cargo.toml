@@ -1,0 +1,14 @@
+[package]
+name = "learning_gfx.rs"
+version = "0.0.0"
+keywords = ["vulkan", "gfx.rs", "learning"]
+authors = ["ds2dy3"]
+
+
+[[bin]]
+name = "creating_logical_device"
+path = "src/vulkan_cookbook/other/01_creating_logical_device/main.rs"
+
+
+[dependencies]
+winit = { path = "dependencies/winit" }
