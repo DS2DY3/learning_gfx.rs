@@ -1,5 +1,5 @@
 [package]
-name = "learning_gfx.rs"
+name = "learning_gfx"
 version = "0.0.0"
 keywords = ["vulkan", "gfx.rs", "learning"]
 authors = ["ds2dy3"]
@@ -17,8 +17,6 @@ dx12 = ["gfx-backend-dx12"]
 
 
 [dependencies]
-#winit = { path = "dependencies/winit" }
-#winit = { version = "0.17", optional = true }
 winit = "0.17"
 gfx-hal = { path = "dependencies/gfx/src/hal", version = "0.1" }
 

@@ -16,6 +16,7 @@ use hal::{
 };
 use hal::{Backbuffer, DescriptorPool, FrameSync, Primitive, SwapchainConfig};
 use hal::{Device, Instance, PhysicalDevice, Surface, Swapchain};
+use hal::QueueFamily;
 
 
 fn main() {
@@ -26,14 +27,33 @@ fn main() {
 
     let (_window, _instance, mut adapters, mut surface) = {
         let window = wb.build(&events_loop).unwrap();
-        let instance = back::Instance::create("gfx-rs quad", 1);
+        let instance = back::Instance::create("creating_logical_device", 1);
         let surface = instance.create_surface(&window);
         let adapters = instance.enumerate_adapters();
         (window, instance, adapters, surface)
     };
 
+    println!("there are {} device on the complter", adapters.len());
+    if adapters.len() > 0 {
+        // enumerating available physical devices
+        let adapter = &adapters[0];
+        // print features
+        println!("device features: {:?}", adapter.physical_device.features());
+        println!("device limits: {:?}", adapter.physical_device.limits());
+        println!("device info: {:?}", adapter.info);
+        // queuefamily
+        let queue_families = &adapter.queue_families;
+        for queue_family in queue_families {
+
+            println!("adapter queue families: {:?}, {:?}, {:?}, {:?}, {:?}",
+                     queue_family.id(), queue_family.max_queues(), queue_family.queue_type(), queue_family.supports_graphics(), queue_family.supports_compute());
+        }
+        // checking available device extensions
+    }
+
+
     events_loop.run_forever(|event| {
-        println!("{:?}", event);
+        // println!("{:?}", event);
 
         match event {
             winit::Event::WindowEvent {
