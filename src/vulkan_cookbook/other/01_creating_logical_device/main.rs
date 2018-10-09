@@ -34,22 +34,34 @@ fn main() {
     };
 
     println!("there are {} device on the complter", adapters.len());
-    if adapters.len() > 0 {
-        // enumerating available physical devices
-        let adapter = &adapters[0];
-        // print features
-        println!("device features: {:?}", adapter.physical_device.features());
-        println!("device limits: {:?}", adapter.physical_device.limits());
-        println!("device info: {:?}", adapter.info);
+    // if adapters.len() > 0 {
+    // enumerating available physical devices
+    let mut adapter = adapters.remove(0);
+    // print features
+    println!("device features: {:?}", adapter.physical_device.features());
+    println!("device limits: {:?}", adapter.physical_device.limits());
+    println!("device info: {:?}", adapter.info);
+    {
         // queuefamily
         let queue_families = &adapter.queue_families;
         for queue_family in queue_families {
-
             println!("adapter queue families: {:?}, {:?}, {:?}, {:?}, {:?}",
                      queue_family.id(), queue_family.max_queues(), queue_family.queue_type(), queue_family.supports_graphics(), queue_family.supports_compute());
         }
-        // checking available device extensions
     }
+    // checking available device extensions
+    // Build a new device and associated command queues
+    let (device, mut queue_group) = adapter
+        .open_with::<_, hal::Graphics>(1, |family| surface.supports_queue_family(family))
+        .unwrap();
+    // }
+    // device: logical device queue_group: QueueGroup
+    // metal QueueFamily only has General type and max_queues == 1
+    // queue only creating when logical device creation
+    println!("get device queue queue family: {:?}, queue count: {:?}", queue_group.family(), queue_group.queues.len());
+
+
+
 
 
     events_loop.run_forever(|event| {
